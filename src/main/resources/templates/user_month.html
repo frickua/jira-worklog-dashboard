@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common-header"/>
+<body>
+<div id="wrapper" >
+    <div th:replace="fragments/common-navabar"/>
+</div>
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <h1 class="page-header">
+                <div style="float: left">
+                <img th:attr="class='avatar', src=${user != null ? user.getAvatarUrl() : null}">
+                </div>
+                <div style="margin-left: 40px" ><a th:text="${user != null? user.userName : null}" th:href="${'/?user=' + userId}"/></div></h1>
+            <form action="/" method="get" enctype="multipart/form-data">
+                <input style="margin-top: 15px;" type="date" name="dateFr" th:value="${#dates.format(dateFr, 'yyyy-MM-dd')}"/>
+                <input type="date" name="dateTo" th:value="${#dates.format(dateTo, 'yyyy-MM-dd')}"/>
+                <input type="hidden" name="user" th:value="${userId}">
+                <input type="submit" id="button" value="Show"/>
+            </form>
+            <br>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+
+    <div class="row" th:each="i : ${#numbers.sequence( 0, days.length-1)}">
+        <div th:class="${j > 4 ? 'col-lg-1' : 'col-lg-2'}" th:each="j : ${#numbers.sequence( 0, 6)}">
+            <div th:class="'panel ' + ${days[i][j].getDayType()}">
+                <div class="panel-heading">
+                    <b th:text="${days[i][j].getDateStr()}"/><br><span th:text="${days[i][j].getDayOfWeek()}"/>
+                </div>
+                <div class="panel-body">
+                    <th:block th:each="workLog : ${days[i][j].getWorkLogs()}">
+                        <h5><span
+                                th:text="${workLog.houers} + ':' + (${workLog.minutes} < 10 ? '0' + ${workLog.minutes} :  ${workLog.minutes}) + 'h '"/><a
+                                th:attr="href='http://jira/browse/' + ${workLog.ticket.number}, target='_blank' "><span
+                                th:text="${workLog.ticket.number}"/>
+                            <sup th:text="${workLog.ticket.sp} + 'sp '"/><div style="font-size: smaller; text-align: right;" th:text="${workLog.ticket.status}"/></a></h5>
+                        <h6 style="font-style: italic; white-space: normal;"
+                            th:text="${workLog.description}"/>
+                    </th:block>
+                    <!--<th:block th:each="ticket : ${days[i][j].getWorkedTickets()}">-->
+                        <!--<h7>-->
+                            <!--<span th:text="${ticket.number}"/>-->
+                        <!--</h7>-->
+                    <!--</th:block>-->
+                </div>
+                <div class="panel-footer">
+                    <b th:text="${days[i][j].getTotalTimeStr() + ' Hours'}"/>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-4 -->
+    </div>
+</div>
+    <!-- /.row -->
+<div th:replace="fragments/common-scripts"/>
+</body>
+</html>

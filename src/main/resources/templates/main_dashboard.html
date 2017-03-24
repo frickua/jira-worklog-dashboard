@@ -1,45 +1,112 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:background="http://www.w3.org/1999/xhtml">
 <head>
     <title>JIRA Worklog</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link rel="stylesheet" type="text/css"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
 
     <link rel="stylesheet" th:href="@{/css/main.css}"
-          href="../../css/main.css" />
-
+          href="../static/css/main.css"/>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-    <div class="container">
+<nav class="navbar navbar-inverse" style="position: fixed; width: 100%;">
+    <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Spring Boot</a>
+            <a class="navbar-brand" href="/">Jira Worklog</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li class="active">
+                    <a href="#">Month</a>
+                </li>
+                <li>
+                    <a href="#sprint">Sprint</a>
+                </li>
+
             </ul>
+            <form action="/month/" method="get" enctype="multipart/form-data">' +
+                <input style="margin-top: 15px;" type="date" name="dateFr" th:value="${#dates.format(dateFr, 'yyyy-MM-dd')}"/>
+                <input type="date" name="dateTo" th:value="${#dates.format(dateTo, 'yyyy-MM-dd')}"/>
+                <input type="submit" id="button" value="Show"/>
+            </form>
         </div>
     </div>
 </nav>
+<!--<div class="container">-->
+<!--&lt;!&ndash; /.container &ndash;&gt;-->
+<!--</div>-->
 
-<div class="container">
+<div class="container-fluid">
+    <div class="table" style="white-space: nowrap; padding-top: 5%">
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <thead>
+            <tr>
+                <th>User</th>
+                <th:block th:each="headerDate : ${header}">
+                    <th th:style="${headerDate.weekend} ? 'color: red; background: rgba(0, 136, 255, 0.12)': 'color: grey;'"/>
+                    <h5 th:text="${headerDate.dateStr}"/>
+                    <h5 th:text="${headerDate.dayOfWeek}"/>
+                </th:block>
+            </tr>
+            </thead>
+            <tbody>
+            <!--/*@thymesVar id="row" type="Row"*/-->
+            <th:block th:each="row : ${rows}">
+                <tr>
+                    <td>
+                        <!--<div style="float: left"><img th:attr="class='avatar', src=${row.user.getAvatarUrl()}"></div><div style="margin-left: 40px" th:text="${row.user.userName}"/>-->
+                        <div th:style="'background-image:url(\'' + ${row.user.getAvatarUrl()} + '\');'" th:attr="class='avatar'" th:text="${row.user.userName}"/>
+                    </td>
+                    <th:block th:each="headerDate : ${header}">
 
-    <div class="starter-template">
-        <h1>JIRA Worklog</h1>
-        <h2>
-            <span th:text="'Message: ' + ${message}"></span>
-        </h2>
+                        <td class="tooltiped"
+                            th:styleappend="${row.worklogsMap.get(headerDate.dateStr)} == null and !${headerDate.weekend} ? 'background: rgba(255, 26, 0, 0.14);' : ( ${headerDate.weekend} ? 'background: rgba(0, 136, 255, 0.12);' : '')">
+
+                            <th:block th:each="workLog : ${row.worklogsMap.get(headerDate.dateStr)}">
+
+                                <h5><span
+                                        th:text="${workLog.houers} + ':' + (${workLog.minutes} < 10 ? '0' + ${workLog.minutes} :  ${workLog.minutes}) + ' '"/><a
+                                        th:attr="href='http://jira/browse/' + ${workLog.ticket.number}, target='_blank' "><span
+                                        th:text="${workLog.ticket.number}"/><sup
+                                        th:text="${workLog.ticket.sp} + 'sp'"/></a></h5>
+                                <h6 style="font-style: italic; white-space: normal;"
+                                    th:text="${workLog.description}"/>
+                            </th:block>
+                            <span class="tooltiptext">
+                                <span th:text="${headerDate.dateStr}"/><br><span th:text="${row.user.userName}"/>
+                            </span>
+                        </td>
+
+                    </th:block>
+                </tr>
+                <tr>
+                    <td><h4  th:text="${row.getTotalTimeStr()} + ' / ' + ${days}"/></td>
+                    <th:block th:each="headerDate : ${header}">
+                        <td><h4 th:text="${row.getTotalTime(headerDate.dateStr)}"/></td>
+                    </th:block>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
     </div>
 
-</div>
-<!-- /.container -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script>-->
+    <!--var $table = $('.table');-->
+    <!--var $fixedColumn = $table.clone().insertBefore($table).addClass('fixed-column');-->
 
-<script type="text/javascript"
-        src="whttps://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--$fixedColumn.find('th:not(:first-child),td:not(:first-child)').remove();-->
+
+    <!--$fixedColumn.find('tr').each(function (i, elem) {-->
+    <!--$(this).height($table.find('tr:eq(' + i + ')').height());-->
+    <!--});-->
+    <!--</script>-->
+</div>
+
 </body>
 </html>

@@ -1,0 +1,56 @@
+@grid-columns: 12;
+
+.table-responsive>.fixed-column {
+    position: absolute;
+    display: inline-block;
+    width: auto;
+    border-right: 1px solid #ddd;
+}
+@media(min-width:768px) {
+    .table-responsive>.fixed-column {
+        display: none;
+    }
+}
+
+.tooltiped {
+    position: relative;
+    border-bottom: 1px dotted black;
+}
+
+.tooltiped .tooltiptext {
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.46);
+    color: #fff;
+    text-align: center;
+    border-radius: 9px;
+    padding: 5px;
+    top: 0%;
+    left: 90%;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltiped:hover .tooltiptext {
+    visibility: visible;
+}
+
+th h5 {
+    text-align: center;
+    font-weight: bold;
+}
+
+img.avatar {
+    border-radius: 24px;
+    margin-right: 10px;
+}
+div.avatar {
+    background-repeat: no-repeat;
+    padding-left: 55px;
+    line-height: 48px;
+    font-size: 16px;
+}
+
+.panel {
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.37);
+}
