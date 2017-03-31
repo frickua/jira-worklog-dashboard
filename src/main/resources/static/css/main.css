@@ -1,4 +1,8 @@
-@grid-columns: 12;
+/*
+ We need customization of bootstrap with @grid-columns: 14;
+http://getbootstrap.com/customize/?id=40e212d43d6cbf70d37457a662ef8749
+ Or use /static/sbadmin/vendor/bootstrap/config.json
+*/
 
 .table-responsive>.fixed-column {
     position: absolute;
