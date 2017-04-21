@@ -1,0 +1,16 @@
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('1', 1, 'Open', 'The issue is open and ready for the assignee to start work on it.', '/images/icons/statuses/generic.png', 2);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('10000', 7, 'Developed', 'Developing finished and localy tested, no DEV build', '/images/icons/statuses/down.png', 4);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('10001', 8, 'Tested', 'Received and attached UAT confirmation', '/images/icons/statuses/email.png', 3);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('10002', 9, 'Suspended', 'Not ready to development', '/images/icons/statuses/needinfo.png', 4);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('10101', 10, 'Approved', null, '/images/icons/statuses/open.png', 2);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('10102', 11, 'Готово к проверке', null, '/images/icons/statuses/closed.png', 3);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('10103', 12, 'To Do', null, '/images/icons/statuses/open.png', 2);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('10104', 13, 'UAT TEST', 'UAT testing by users', '/images/icons/statuses/generic.png', 4);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('10105', 14, 'Released to Prod', null, '/images/icons/statuses/generic.png', 3);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('10202', 15, 'Analysis', 'Технический анализ', '/images/icons/statuses/generic.png', 2);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('10302', 16, 'Preliminary test', null, '/images/icons/statuses/generic.png', 4);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('10402', 17, 'Code review', 'Ревизия кода', '/images/icons/statuses/generic.png', 4);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('3', 3, 'In Progress', 'This issue is being actively worked on at the moment by the assignee.', '/images/icons/statuses/inprogress.png', 4);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('4', 4, 'Reopened', 'This issue was once resolved, but the resolution was deemed incorrect. From here issues are either marked assigned or resolved.', '/images/icons/statuses/reopened.png', 2);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('5', 5, 'UAT testing', 'A resolution has been taken, and it is awaiting verification by reporter. From here issues are either reopened, or are closed.', '/images/icons/statuses/resolved.png', 3);
+INSERT INTO jira.issuestatus (ID, SEQUENCE, pname, DESCRIPTION, ICONURL, STATUSCATEGORY) VALUES ('6', 6, 'Closed', 'The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.', '/images/icons/statuses/closed.png', 3);
