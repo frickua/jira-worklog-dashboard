@@ -22,7 +22,7 @@ buildscript {
 
 
         bootRun {
-            addResources = true
+            sourceResources sourceSets.main
         }
 
         sourceCompatibility = 1.8
