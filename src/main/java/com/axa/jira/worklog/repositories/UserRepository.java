@@ -26,7 +26,7 @@ public class UserRepository {
         List<Map<String, Object>> results = jdbcTemplate.queryForList(
                 "SELECT " +
                         "wu.*," +
-                        "(SELECT max(id) FROM avatar WHERE owner = w.AUTHOR) AS avatar_id  " +
+                        "(SELECT max(id) FROM avatar WHERE owner = wu.user_name) AS avatar_id  " +
                         "FROM cwd_user wu " +
                         "WHERE " +
                         "EXISTS(" +
